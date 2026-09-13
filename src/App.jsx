@@ -6,7 +6,20 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
-// Add page imports here
+import { Navigate } from 'react-router-dom';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import ForgotPassword from '@/pages/ForgotPassword';
+import ResetPassword from '@/pages/ResetPassword';
+import Layout from '@/components/Layout';
+import Dashboard from '@/pages/Dashboard';
+import Translate from '@/pages/Translate';
+import AnalyzeUpload from '@/pages/AnalyzeUpload';
+import History from '@/pages/History';
+import DatasetAdmin from '@/pages/DatasetAdmin';
+import { LanguageProvider } from '@/lib/i18n';
+import { ThemeProvider } from '@/lib/theme';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -34,7 +47,19 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
-      {/* Add your page Route elements here */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/translate" element={<Translate />} />
+          <Route path="/upload" element={<AnalyzeUpload />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/dataset" element={<DatasetAdmin />} />
+        </Route>
+      </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
@@ -45,13 +70,17 @@ function App() {
 
   return (
     <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <ScrollToTop />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClientInstance}>
+            <Router>
+              <ScrollToTop />
+              <AuthenticatedApp />
+            </Router>
+            <Toaster />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </LanguageProvider>
     </AuthProvider>
   )
 }
