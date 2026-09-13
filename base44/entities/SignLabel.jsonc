@@ -1,0 +1,43 @@
+{
+  "name": "SignLabel",
+  "type": "object",
+  "properties": {
+    "label_ku": {
+      "type": "string",
+      "title": "Kurdish word"
+    },
+    "label_en": {
+      "type": "string",
+      "title": "English word"
+    },
+    "label_ar": {
+      "type": "string",
+      "title": "Arabic word"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    }
+  },
+  "required": [
+    "label_ku"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

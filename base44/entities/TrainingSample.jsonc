@@ -1,0 +1,54 @@
+{
+  "name": "TrainingSample",
+  "type": "object",
+  "properties": {
+    "label_id": {
+      "type": "string",
+      "title": "Label id"
+    },
+    "label_ku": {
+      "type": "string",
+      "title": "Label Kurdish word"
+    },
+    "media_type": {
+      "type": "string",
+      "enum": [
+        "image",
+        "video"
+      ],
+      "default": "image"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "label_id",
+    "label_ku",
+    "file_url",
+    "media_type"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
