@@ -1,5 +1,22 @@
 # Base44 Project
 
+## Local Kurdish gesture test
+
+This test build includes an on-device MediaPipe gesture model. In the live
+camera and image-upload pages, a recognized `Thumb_Up` gesture is displayed as
+the Kurdish word `باشە`. The model files and WebAssembly runtime are bundled
+under `public/`, so this recognition test does not use a ChatGPT, Gemini, or
+other paid AI API.
+
+Allow camera permission in the browser, keep the whole hand visible, and hold
+the gesture steady for one to two seconds. This is a proof-of-concept for the
+recognition flow; the later custom Kurdish sign model will replace the bundled
+generic gesture model.
+
+No `AI_MODEL_URL` or `AI_MODEL_API_KEY` secret is required for this test build.
+The speaker button uses the browser's built-in speech synthesis and does not
+call a paid speech API.
+
 Use this repository to run and edit the app locally, then publish changes back through Base44.
 
 Any change pushed to the repo will also be reflected in the Base44 Builder.
